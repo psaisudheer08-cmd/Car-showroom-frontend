@@ -1,0 +1,784 @@
+/* ==========================================================================
+   APEX MOTORS - CAR SHOWROOM STYLESHEET
+   Built purely with HTML5 & CSS3 (Flexbox). No JavaScript, no frameworks.
+   Organized in clean, beginner-friendly sections with plain English comments.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   BLOCK 1: CSS VARIABLES (:root)
+   What it does: Stores our color palette, shadows, and spacing in one place
+   so we can reuse them across the website easily without repeating hex codes.
+   ========================================================================== */
+:root {
+  /* Primary brand colors: red highlights speed and energy in sports cars */
+  --primary-color: #d32f2f;
+  --primary-hover: #b71c1c;
+
+  /* Dark tones for headers, footer and high-contrast text */
+  --bg-dark: #111827;
+  --bg-dark-card: #1f2937;
+  
+  /* Light neutral backgrounds for clean readability */
+  --bg-light: #f8fafc;
+  --bg-card: #ffffff;
+  
+  /* Text colors for readability hierarchy */
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #ffffff;
+  
+  /* Borders and dividers */
+  --border-color: #e2e8f0;
+  
+  /* Box shadow values for giving cards and forms a floating 3D depth */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.15);
+
+  /* Standard transitions for smooth hover animations */
+  --transition-normal: 0.3s ease;
+  
+  /* Standard rounded corners */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+}
+
+
+/* ==========================================================================
+   BLOCK 2: RESET AND BASE ELEMENTS
+   What it does: Strips away default browser margins and paddings so our
+   layout looks consistent across Chrome, Firefox, Edge, and Safari.
+   ========================================================================== */
+
+/* Universal selector sets box-sizing to border-box so padding doesn't inflate element width */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Enables smooth sliding animation when clicking #id anchor links */
+html {
+  scroll-behavior: smooth;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Base body styling: sets default font, light background, and prevents unwanted horizontal scrolling */
+body {
+  background-color: var(--bg-light);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Ensures images never spill outside their parent container */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Removes standard underline from all links by default */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Removes default bullet points from unordered lists */
+ul {
+  list-style: none;
+}
+
+/* Reusable container that centers content on the screen with consistent padding */
+.section-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 70px 0;
+}
+
+/* Reusable header block at the top of each section */
+.section-header {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+/* Main title styling for each section */
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--bg-dark);
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+/* Subtitle paragraph right beneath the section title */
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Base button styling shared across all buttons on the website */
+.btn {
+  display: inline-block;
+  padding: 12px 26px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: none;
+  transition: background-color var(--transition-normal), transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+
+/* ==========================================================================
+   BLOCK 3: HEADER & NAVIGATION BAR
+   What it does: Sticks to the top of the viewport and uses Flexbox to place
+   the showroom logo on the left and navigation menu links on the right.
+   ========================================================================== */
+
+/* Keeps the header fixed to the top as the user scrolls down the page */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #ffffff;
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Flexbox container aligning the logo and navigation links side-by-side */
+.nav-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Brand logo styling with icon and bold highlight text */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--bg-dark);
+}
+
+/* Small emoji car icon */
+.logo-icon {
+  font-size: 1.6rem;
+}
+
+/* Highlighting the 'Motors' word in brand primary red */
+.logo-text strong {
+  color: var(--primary-color);
+}
+
+/* Flexbox row for menu items with horizontal spacing between links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Individual navigation link styling */
+.nav-item {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-normal), background-color var(--transition-normal);
+}
+
+/* Changes link color and adds a soft background highlight on hover */
+.nav-item:hover {
+  color: var(--primary-color);
+  background-color: #fee2e2;
+}
+
+
+/* ==========================================================================
+   BLOCK 4: HERO BANNER SECTION
+   What it does: Creates a fullscreen-style dramatic banner with an image
+   background, a dark transparent overlay, and centered welcoming text.
+   ========================================================================== */
+
+/* Hero container using relative positioning and Flexbox to center its content */
+.hero-section {
+  position: relative;
+  min-height: 82vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  padding: 40px 20px;
+}
+
+/* Dark semi-transparent layer over the background image to make white text easy to read */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 24, 39, 0.75);
+}
+
+/* Content box sits on top of the dark overlay */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  color: var(--text-light);
+}
+
+/* Big bold headline */
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+/* Explanatory subtitle below the headline */
+.hero-tagline {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: #e2e8f0;
+}
+
+/* Hero primary call-to-action button */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  box-shadow: 0 4px 14px rgba(211, 47, 47, 0.4);
+}
+
+/* Lifts the button slightly and darkens the color when hovered */
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(211, 47, 47, 0.6);
+}
+
+
+/* ==========================================================================
+   BLOCK 5: CAR MODELS SECTION (FLEXBOX CARDS)
+   What it does: Uses Flexbox with flex-wrap: wrap to display responsive car
+   cards that naturally flow into 3 columns on desktop and 1 on mobile.
+   ========================================================================== */
+
+/* Background for the car section */
+.cars-section {
+  background-color: var(--bg-light);
+}
+
+/* Flexbox container that holds all 6 car cards with space between them */
+.car-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* Individual car card: white background, rounded edges, and smooth lift animation */
+.car-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  width: 350px;
+  max-width: 100%;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+/* Smooth lift and shadow expansion when hovering over a car card */
+.car-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Fixed-height wrapper to keep all car photos identical in size */
+.car-image-container {
+  width: 100%;
+  height: 220px;
+  background-color: #cbd5e1;
+  overflow: hidden;
+}
+
+/* Makes sure the photo fills the box without stretching or distortion */
+.car-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* Subtle photo zoom effect when card is hovered */
+.car-card:hover .car-image {
+  transform: scale(1.05);
+}
+
+/* Inner card body: Flex column with flex-grow so all cards stretch to equal height */
+.car-card-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Car model name */
+.car-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--bg-dark);
+}
+
+/* Sub-label under the car name (e.g., Luxury Sedan) */
+.car-category {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+/* Price tag highlighted in bold primary red */
+.car-price {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 18px;
+}
+
+/* Specifications block using Flexbox to place 4 key specs in a neat 2x2 badge layout */
+.specs-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background-color: #f1f5f9;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 18px;
+}
+
+/* Individual spec item taking roughly half the width */
+.spec-item {
+  width: calc(50% - 4px);
+  font-size: 0.85rem;
+}
+
+/* Gray label for spec property (Engine, Mileage, Fuel) */
+.spec-label {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Dark text for the spec value */
+.spec-value {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* Box containing the list of key features */
+.features-box {
+  margin-bottom: 22px;
+}
+
+/* Heading for key features */
+.features-heading {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--bg-dark);
+  margin-bottom: 8px;
+}
+
+/* Bullet list of features with custom bullet styling */
+.features-list {
+  padding-left: 0;
+}
+
+/* Individual feature item */
+.features-list li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+  position: relative;
+  padding-left: 18px;
+}
+
+/* Adding a clean red checkmark before each feature */
+.features-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* View Details button pinned to the bottom of the card using margin-top: auto */
+.btn-card {
+  margin-top: auto;
+  background-color: #f1f5f9;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+}
+
+/* Highlights the card button on hover */
+.btn-card:hover {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border-color: var(--primary-color);
+}
+
+
+/* ==========================================================================
+   BLOCK 6: COMPARISON TABLE SECTION
+   What it does: Formats an HTML <table> with a dark header, zebra stripes,
+   and hover highlights. Wrapped in a scrollable container for small screens.
+   ========================================================================== */
+
+/* Contrast background for the comparison section */
+.compare-section {
+  background-color: #ffffff;
+}
+
+/* Container that prevents table from breaking mobile layout by adding horizontal scrolling */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+}
+
+/* Full-width table with collapsed borders for a neat grid */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+  text-align: left;
+}
+
+/* Styling for header cells */
+.comparison-table thead th {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  padding: 18px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-bottom: 3px solid var(--primary-color);
+}
+
+/* Standard table body cells padding and subtle bottom border */
+.comparison-table tbody td {
+  padding: 16px 20px;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Leftmost column bold label styling */
+.comparison-table td.spec-name {
+  font-weight: 700;
+  color: var(--bg-dark);
+  background-color: #f8fafc;
+  width: 25%;
+}
+
+/* Prominent red styling for the price row cells */
+.comparison-table td.table-price {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+}
+
+/* Alternating zebra row background for easy reading */
+.comparison-table tbody tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+/* Subtle row highlight when moving the mouse across comparison rows */
+.comparison-table tbody tr:hover {
+  background-color: #fee2e2;
+  transition: background-color 0.2s ease;
+}
+
+
+/* ==========================================================================
+   BLOCK 7: TEST DRIVE FORM SECTION
+   What it does: Creates a clean, centered booking form with Flexbox rows,
+   distinct inputs, hover/focus rings, and responsive wrapping.
+   ========================================================================== */
+
+/* Soft background for the form section */
+.test-drive-section {
+  background-color: var(--bg-light);
+}
+
+/* Card-style white container wrapping the form */
+.form-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  background-color: var(--bg-card);
+  padding: 40px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+}
+
+/* Flexbox row placing two input fields side-by-side */
+.form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+/* Form group containing one label and its input stacked vertically */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Form label styling */
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+/* Shared styling for text inputs and dropdown select elements */
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text-main);
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+/* Highlights the active input with a colored border and subtle glow */
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.15);
+}
+
+/* Container for centering the submit button */
+.form-submit-container {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+/* Submit button styling */
+.btn-submit {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 1.05rem;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+}
+
+/* Submit button hover effect */
+.btn-submit:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(211, 47, 47, 0.5);
+}
+
+/* Confidentiality note under the submit button */
+.form-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.5;
+}
+
+
+/* ==========================================================================
+   BLOCK 8: FOOTER & CONTACT SECTION
+   What it does: Creates a professional multi-column dark footer using
+   Flexbox, displaying showroom details, hours, links, and copyright text.
+   ========================================================================== */
+
+/* Dark background footer */
+.site-footer {
+  background-color: var(--bg-dark);
+  color: #cbd5e1;
+}
+
+/* Flexbox container arranging footer columns horizontally with wrapping */
+.footer-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 0 40px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+/* Individual footer column: min-width ensures it drops cleanly on mobile */
+.footer-col {
+  flex: 1;
+  min-width: 220px;
+}
+
+/* Footer column headings */
+.footer-heading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin-bottom: 18px;
+  border-left: 3px solid var(--primary-color);
+  padding-left: 10px;
+}
+
+/* Body text inside footer columns */
+.footer-text {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 10px;
+  color: #94a3b8;
+}
+
+/* Quick link list spacing */
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+/* Quick links hover transition */
+.footer-links a {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  transition: color var(--transition-normal), padding-left var(--transition-normal);
+}
+
+/* Shifts link slightly right and turns red on hover */
+.footer-links a:hover {
+  color: var(--text-light);
+  padding-left: 5px;
+}
+
+/* Sub-footer bar with copyright text */
+.footer-bottom {
+  border-top: 1px solid #1f2937;
+  padding: 22px 20px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+
+/* ==========================================================================
+   BLOCK 9: RESPONSIVE MEDIA QUERIES
+   What it does: Adapts layout at 768px (tablets) and 600px (mobile phones)
+   ensuring zero horizontal scrolling and ideal readability on every screen.
+   ========================================================================== */
+
+/* --- TABLET VIEW (Max Width 768px) --- */
+@media (max-width: 768px) {
+  /* Smaller section padding for tablet screens */
+  .section-container {
+    padding: 50px 0;
+  }
+
+  /* Scale down hero title for smaller displays */
+  .hero-title {
+    font-size: 2.3rem;
+  }
+
+  .hero-tagline {
+    font-size: 1.05rem;
+  }
+
+  /* Stacks two-column form rows into a single vertical column */
+  .form-row {
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  /* Adjust padding inside form card */
+  .form-wrapper {
+    padding: 26px 20px;
+  }
+}
+
+/* --- MOBILE PHONE VIEW (Max Width 600px) --- */
+@media (max-width: 600px) {
+  /* Stacks navbar vertically: logo on top, menu links below */
+  .nav-container {
+    height: auto;
+    flex-direction: column;
+    padding: 14px 0;
+    gap: 12px;
+  }
+
+  /* Wraps navigation links and centers them nicely */
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 14px;
+  }
+
+  .nav-item {
+    font-size: 0.88rem;
+    padding: 6px 10px;
+  }
+
+  /* Compact hero section for phones */
+  .hero-section {
+    min-height: 70vh;
+    padding: 50px 15px;
+  }
+
+  .hero-title {
+    font-size: 1.85rem;
+  }
+
+  .hero-tagline {
+    font-size: 0.95rem;
+  }
+
+  /* Car cards take 100% width on mobile screens */
+  .car-card {
+    width: 100%;
+  }
+
+  /* Section titles slightly smaller on mobile */
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  /* Footer columns take full width and stack */
+  .footer-col {
+    min-width: 100%;
+  }
+}
